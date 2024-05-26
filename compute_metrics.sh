@@ -1,0 +1,4 @@
+python compute_metrics.py \
+experiments_on_dhf1k/10_15_MViTv2_S_BS_3*GPU_4_DDP_VisionEnc_SalDecoder_Add_Time_on_Noise_Training_X0_w_MultiScale_w_MSE_lr_1e-4_test_dhf1k/dhf1k_test_samplings \
+dhf1k
+

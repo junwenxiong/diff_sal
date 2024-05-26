@@ -1,0 +1,77 @@
+data:
+    image_size: 224
+    width: 384
+    channels: 1
+    logit_transform: false
+    uniform_dequantization: false
+    gaussian_dequantization: true
+    rescaled: false
+
+model:
+    type: "simple"
+    in_channels: 1
+    out_ch: 1
+    ch: 128
+    ch_mult: [1, 2, 2, 2, 4]
+    num_res_blocks: 2
+    attn_resolutions: [] # attention scale
+    dropout: 0.1
+    var_type: fixedlarge
+    ema_rate: 0.9999
+    ema: false
+    resamp_with_conv: True
+
+diffusion:
+    beta_schedule: cosine
+    beta_start: 0.0001
+    beta_end: 0.02
+    num_diffusion_timesteps: 1000 
+
+training:
+    batch_size: 48
+    n_epochs: 3
+    n_epochs_for_av_data: 4
+    snapshot_freq: 5000
+    validation_freq: 10000
+    log_freq: 200
+    training_target: x0  # x0, noise
+
+loss:
+    loss_kl: false
+    kl_weight: 1.0
+    loss_mse: true
+    mse_weight: 1.0
+    loss_ce: false
+    ce_weight: 1.0
+    loss_cc: false
+    cc_weight: -0.1
+    loss_sim: false
+    sim_weight: -0.1
+    loss_nss: false
+    nss_weight: -0.1
+
+optim:
+    weight_decay: 0.000
+    optimizer: "Adam"
+    lr: 0.0001
+    beta1: 0.9
+    amsgrad: false
+    eps: 0.00000001
+    grad_clip: 1.0
+
+
+sampling:
+    batch_size: 2
+    last_only: true
+    skip_type: logSNR
+    sample_type: ddim # dpmsolver
+    timesteps: 1
+    dpm_solver_order: 2 
+    denoise: true
+    dpm_solver_method: multistep
+    dpm_solver_type: dpmsolver
+    dpm_solver_atol: 0.0078
+    dpm_solver_rtol: 0.05
+    lower_order_final: false
+    thresholding: false
+    eta: 0.
