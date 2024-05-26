@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 # 🚅 How To Train 
 
-🎉 To make our method reproducibl, we have released all of our training code. Four 4090 GPUs are enough :)
+🎉 To make our method reproducible, we have released all of our training code. Four 4090 GPUs are enough :)
 
 ## Data Structure
 
