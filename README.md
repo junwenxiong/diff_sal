@@ -1,4 +1,4 @@
-# DiffSal: Joint Audio and Video Learning for Diffusion Saliency Prediction
+# DiffSal: Joint Audio and Video Learning for Diffusion Saliency Prediction (CVPR 24)
 Official implementation of DiffSal, a diffusion-based generalized audio-visual saliency prediction framework using simple MSE objective function.
 
 [![arXiv](https://img.shields.io/badge/ArXiv-2403.01226-orange)](https://arxiv.org/abs/2403.01226) [![projectpage](https://img.shields.io/badge/Project-Page-green)](https://junwenxiong.github.io/DiffSal/index.html) [![checkpoints](https://img.shields.io/badge/Model-Checkpoints-blue)](https://drive.google.com/drive/folders/1NiW4yyg6EGOQpNcGJAQsNgK9-PfdxFSJ?usp=sharing)
