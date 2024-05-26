@@ -15,7 +15,6 @@ VideoSalPrediction/*
 *.pyc
 wandb
 wandb/*
-scripts/*
 
 eval_multiprocess.py
 
