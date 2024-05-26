@@ -253,7 +253,7 @@ class DiffusionTrainer(object):
                             logger=None,
                         )
 
-                cur_val_loss = self.test_av_data(
+                cur_val_loss = self.test_av_data_for_training(
                     data_config,
                     epoch=epoch + 1,
                     step=step,
@@ -762,6 +762,62 @@ class DiffusionTrainer(object):
                 logger=val_logger,
             )
 
+        return loss_metrics.get_metric("total").avg
+
+    @torch.no_grad()
+    def test_av_data_for_training(
+        self,
+        data_config,
+        epoch=0,
+        step=0,
+        val_logger=None,
+        save_img=True,
+        is_testing=True,
+    ):
+
+        print("Start testing!!!")
+        args, config = self.args, self.config
+
+        split = data_config["index"]
+        result_path = f"{split}_results"
+        result_path = os.path.join(args.root_path, result_path)
+        os.makedirs(result_path, exist_ok=True)
+
+        name_list = ["main", "cc", "sim", "nss", "total"]
+        loss_metrics = AverageMeterList(name_list=name_list)
+
+        val_loader = get_val_av_loader(args, data_config)
+        for i, (data, targets) in enumerate(val_loader):
+            imgs, x_noise = self.prepare_data(data, targets, is_training=False)
+            self.model.eval()
+            audio = data["audio"].cuda()
+            pred = self.sample_image(x_noise, img=imgs, audio=audio)
+            pred = inverse_data_transform(config, pred)
+
+            total_loss = get_kl_cc_sim_loss_wo_weight(
+                config, pred, targets["salmap"].to(pred.device)
+            )
+
+            loss_metrics.update(total_loss)
+
+            if self.args.rank == 0 and i % self.config.training.log_freq == 1:
+                self.print_val_info(
+                    epoch, i, val_loader, step, loss_metrics, is_print=True, logger=None
+                )
+
+            if save_img:
+                self.save_img(data, pred, result_path)
+
+        if val_logger != None and args.rank == 0:
+            self.print_val_info(
+                epoch,
+                i,
+                val_loader,
+                step,
+                loss_metrics,
+                is_print=False,
+                logger=val_logger,
+            )
         return loss_metrics.get_metric("total").avg
 
     @torch.no_grad()

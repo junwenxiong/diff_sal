@@ -1,9 +1,7 @@
 # DiffSal: Joint Audio and Video Learning for Diffusion Saliency Prediction
 Official implementation of DiffSal, a diffusion-based generalized audio-visual saliency prediction framework using simple MSE objective function.
 
-[![arXiv](https://img.shields.io/badge/ArXiv-2403.01226-orange)](https://arxiv.org/abs/2403.01226) [![projectpage](https://img.shields.io/badge/Project-Page-green)](https://junwenxiong.github.io/DiffSal/index.html)
-
- <!-- [![checkpoints](https://img.shields.io/badge/Model-Checkpoints-blue)]() -->
+[![arXiv](https://img.shields.io/badge/ArXiv-2403.01226-orange)](https://arxiv.org/abs/2403.01226) [![projectpage](https://img.shields.io/badge/Project-Page-green)](https://junwenxiong.github.io/DiffSal/index.html) [![checkpoints](https://img.shields.io/badge/Model-Checkpoints-blue)](https://drive.google.com/drive/folders/1NiW4yyg6EGOQpNcGJAQsNgK9-PfdxFSJ?usp=sharing)
 
 
 
@@ -18,7 +16,7 @@ Official implementation of DiffSal, a diffusion-based generalized audio-visual s
 - **May. 26, 2024**. Training code released now! It's time to train DiffSal! 🚀🚀
 
 # 📌 TODOs
-- [ ] release pretrained weights.
+- [x] release pretrained weights.
 
 # 🔧 Setup
 
@@ -35,7 +33,7 @@ pip install -r requirements.txt
 
 # 🚅 How To Train 
 
-🎉 To make our method reproducibl, we have released all of our training code. Four 4090 GPUs are enough :).
+🎉 To make our method reproducibl, we have released all of our training code. Four 4090 GPUs are enough :)
 
 ## Data Structure
 
@@ -93,6 +91,11 @@ Then, use the following commands to fine-tune the model:
 sh scripts/train_av.sh
 ```
 If you want to infer the model, just remove ``--train``, set ``--test``, and leave the rest of the configuration unchanged.
+
+# Inference 
+
+We provide the pretrained weights in this  [share link](https://drive.google.com/drive/folders/1NiW4yyg6EGOQpNcGJAQsNgK9-PfdxFSJ?usp=sharing). You need to creat a ```exp dir``` firstly, and then put the uncompressed pretrained weights into the ```exp dir```. You just need to set the value of the root_path field in the given training command to the path where the pre-trained weights are saved, e.g.: ```--root_path=experiments_on_av_data/audio_visual```.
+
 
 # BibTeX
 
