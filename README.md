@@ -42,7 +42,7 @@ pip install -r requirements.txt
 The DiffSal model needs to be pre-trained on the DHF1k dataset.
 
 ```bash
-./datasets/dhf1k
+./data/dhf1k
     ├── frames
     │   ├── 1
     │   │   ├── 1.png
@@ -58,23 +58,23 @@ The DiffSal model needs to be pre-trained on the DHF1k dataset.
 ```
 The DiffSal model is then fine-tuned on the audio-visual dataset.
 ```bash
-./datasets/video_frames
+./data/video_frames
     ├── AVAD
     │   ├── V1_Speech1
     │   │   ├── img_00001.jpg
     │   │   ├── img_00002.jpg
     │   │   ...
     │   │   ├── img_00100.jpg
-./datasets/video_audio
+./data/video_audio
     ├── AVAD
     │   ├── V1_Speech1
     │   │   ├── V1_Speech1.wav
-./datasets/annotations
+./data/annotations
     ├── AVAD
     │   ├── V1_Speech1
     │   │   ├── maps
     │   │   │   ├── eyeMap_00001.jpg
-./datasets/fold_lists/
+./data/fold_lists/
     ├── AVAD_list_test_1_fps.txt
     ├── AVAD_list_test_2_fps.txt
     ├── AVAD_list_test_3_fps.txt
